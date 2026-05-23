@@ -128,7 +128,8 @@
   .bridge__phsub { font-size:13px; color:var(--ink-soft); }
   .bridge__links { margin-top:26px; display:flex; gap:13px; justify-content:center; flex-wrap:wrap; }
   .btn--bridge { background:linear-gradient(135deg,var(--sage-deep),var(--sage)); color:#fff; box-shadow:0 14px 34px rgba(94,107,82,.4); }
-  .btn--bridge-kakao { background:#FAE100; color:#3A1D1D; }
+  .btn--bridge-kakao { background:#FAE100; color:#3A1D1D; box-shadow:0 16px 40px rgba(250,225,0,.4); font-size:17px; padding:18px 32px; }
+  .bridge__trust { font-size:13px; color:var(--ink-soft); margin-top:16px; letter-spacing:.01em; }
   .footer { background:#1A1F16; color:rgba(244,241,233,.5); text-align:center; font-size:13px; padding:54px 24px calc(44px + env(safe-area-inset-bottom)); line-height:1.7; }
   .footer__brand { font-family:var(--serif); font-size:18px; color:rgba(244,241,233,.9); letter-spacing:.02em; margin-bottom:14px; }
   .footer__msg { color:rgba(244,241,233,.66); line-height:1.8; }
@@ -154,6 +155,35 @@
   /* PIVOT — 1박 멈춤 전환어 */
   .pivot-word { font-family:var(--serif); font-size:15px; color:var(--ink-soft); letter-spacing:.06em; margin:14px 0; opacity:.85; }
   .narr--light + .pivot-word, .pivot-word.is-light { color:rgba(251,249,244,.78); text-shadow:0 2px 12px rgba(0,0,0,.5); }
+
+  /* ===== 웹툰식 거리감 : 질문을 위에 띄우고 그 아래 암흑을 스크롤로 통과시킨다 ===== */
+  /* 긴 패널 = 한 화면보다 길게(JS가 data-h 배수로 높이 지정). 콘텐츠는 상단 1/3에 고정 */
+  .panel--void { justify-content:flex-start; padding-top:16vh; }
+  /* 하단으로 갈수록 완전한 암흑 — '답이 없는 빈자리' */
+  .panel--void::before { content:""; position:absolute; left:0; right:0; bottom:0; height:62%; z-index:1;
+    background:linear-gradient(180deg, transparent, rgba(8,10,7,.78) 55%, #060805 100%); pointer-events:none; }
+  /* 보이드 한가운데 떠 있는 불씨 — 비어 있되 죽지 않은 공간(브랜드 세이지·골드) */
+  .ember { position:absolute; left:50%; bottom:20%; z-index:2; width:100%; max-width:340px;
+    transform:translateX(-50%); pointer-events:none; opacity:0; transition:opacity 1.6s ease 0.4s; }
+  .panel.is-in .ember { opacity:1; }
+  .ember span { position:absolute; width:5px; height:5px; border-radius:50%;
+    background:radial-gradient(circle, #E9D9A8, rgba(233,217,168,0)); animation:drift 7s ease-in-out infinite; }
+  .ember span:nth-child(1){ left:18%; bottom:0;  animation-delay:0s;   }
+  .ember span:nth-child(2){ left:52%; bottom:30%; width:4px;height:4px; animation-delay:1.4s; background:radial-gradient(circle,#8A9A7B,rgba(138,154,123,0)); }
+  .ember span:nth-child(3){ left:74%; bottom:12%; width:6px;height:6px; animation-delay:.7s; }
+  .ember span:nth-child(4){ left:38%; bottom:48%; width:3px;height:3px; animation-delay:2.1s; }
+  @keyframes drift { 0%{transform:translateY(0);opacity:.15;} 50%{transform:translateY(-26px);opacity:.85;} 100%{transform:translateY(-52px);opacity:0;} }
+  /* 보이드 하단의 미세한 스크롤 신호 — '비어 있지만 의도된 공간'임을 알린다 */
+  .void-cue { position:absolute; left:50%; bottom:7%; transform:translateX(-50%); z-index:3;
+    font-size:11px; letter-spacing:.32em; color:rgba(233,217,168,.5); animation:bob 2.4s ease-in-out infinite; }
+  @media (max-width:480px){ .panel--void { padding-top:13vh; } }
+
+  /* 보이드 브릿지 — 마지막 행동 직전, 암흑을 한 번 통과시켜 '당겨옴'의 낙차를 만든다 */
+  .void-bridge { position:relative; height:46vh; overflow:hidden;
+    background:linear-gradient(180deg,#15150F 0%, #070906 55%, #0a0d08 100%); }
+  .void-bridge .ember { opacity:1; bottom:34%; }
+  .void-bridge .void-cue { color:rgba(233,217,168,.45); }
+  @media (max-width:480px){ .void-bridge { height:40vh; } }
 </style>
 </head>
 <body>
@@ -165,7 +195,7 @@
   <div class="panel__inner">
     <span class="chap"><span class="chap__no">여는 이야기</span><span class="chap__t">조용한 아침</span></span>
     <div class="glass">
-      <p class="narr">아침의 펜션은 조용합니다.<br><strong>네이버 예약도</strong> 잘 운영되고 계십니다.</p>
+      <p class="narr">아침의 펜션은 조용합니다.<br><strong>네이버 플레이스도</strong> 잘 운영되고 계십니다.</p>
       <p class="sub">객실도, 응대도 이미 충분합니다.<br>대표님은 이미 좋은 펜션을 가지고 계십니다.</p>
     </div>
   </div>
@@ -238,8 +268,8 @@
   </div>
 </section>
 
-<!-- 여섯 (통찰) -->
-<section class="panel photo" data-emotion="open">
+<!-- 여섯 (통찰 · OPEN-LOOP 보이드) -->
+<section class="panel photo panel--void" data-emotion="open" data-h="1.7">
   <img class="cut" src="img/cut-06.jpg" alt="" decoding="async" />
   <div class="panel__inner">
     <span class="chap"><span class="chap__no">여섯</span><span class="chap__t">떠나는 진짜 이유</span></span>
@@ -249,6 +279,8 @@
       <p class="sub" style="margin-top:18px;margin-bottom:0;color:var(--ink);font-weight:700">그런데 — 지금 우리 펜션은<br>어느 쪽일까요?</p>
     </div>
   </div>
+  <div class="ember"><span></span><span></span><span></span><span></span></div>
+  <div class="void-cue">⌄</div>
 </section>
 
 <!-- 일곱 (비교) -->
@@ -319,7 +351,7 @@
   <div class="panel__inner">
     <span class="chap"><span class="chap__no">열</span><span class="chap__t">먼저 안내드립니다</span></span>
     <div class="glass">
-      <p class="narr" style="font-size:clamp(19px,5vw,26px);margin-bottom:20px">이미 네이버 예약을 맡겨주신<br><span class="gold">기존 대표님께 먼저</span> 안내드립니다.</p>
+      <p class="narr" style="font-size:clamp(19px,5vw,26px);margin-bottom:20px">이미 네이버 관리를 맡겨주신<br><span class="gold">기존 대표님께 먼저</span> 안내드립니다.</p>
       <div class="terms">
         <div class="terms__row"><span class="terms__n">1</span><div class="terms__t">홈페이지는 처음 한 번만<span>펜션 공식 안내 페이지를 기준점으로 구축</span></div></div>
         <div class="terms__row"><span class="terms__n">2</span><div class="terms__t">관리는 분기마다 가볍게<span>방치되지 않도록 정보·검색 채널을 이어서 관리</span></div></div>
@@ -332,7 +364,7 @@
 
 <!-- 열하나 (NEW · 1년 뒤 자산) -->
 <section class="panel photo" data-emotion="good">
-  <img class="cut" src="img/cut-08.jpg" alt="" decoding="async" />
+  <img class="cut" src="img/cut-10-asset.jpg" alt="" decoding="async" />
   <div class="panel__inner">
     <span class="chap"><span class="chap__no">열하나</span><span class="chap__t">1년 뒤, 쌓이는 것</span></span>
     <div class="underlay" style="margin-bottom:20px">
@@ -347,33 +379,39 @@
   </div>
 </section>
 
-<!-- 닫는 이야기 (행동 · 언더레이 · 전화번호 제거) -->
+<!-- 보이드 브릿지 — 마지막 행동 직전, 암흑 한 번 통과 -->
+<div class="void-bridge" aria-hidden="true">
+  <div class="ember"><span></span><span></span><span></span><span></span></div>
+  <div class="void-cue">⌄</div>
+</div>
+
+<!-- 닫는 이야기 (미완 질문 → bridge로 흐르게) -->
 <section class="panel photo" data-emotion="action">
   <img class="cut" src="img/cut-09-closing.jpg" alt="" decoding="async" />
   <div class="panel__inner">
-    <span class="chap"><span class="chap__no">닫는 이야기</span><span class="chap__t">그 지역의 기준이 되도록</span></span>
+    <span class="chap"><span class="chap__no">닫는 이야기</span><span class="chap__t">지금, 우리 펜션은</span></span>
     <div class="underlay">
-      <p class="narr narr--light">우리 펜션도 <span class="gold" style="color:#E9D9A8">네이버 밖에서</span><br>그 지역의 기준이 되도록 정비합니다.</p>
-      <p class="sub sub--light" style="margin-bottom:4px">펜션명·지역만 알려주시면,<br>Weplace가 1차 확인 후 바로 연락드립니다.</p>
+      <p class="narr narr--light">네이버 밖에서 우리 펜션이 어떻게 보이는지,<br><span class="gold" style="color:#E9D9A8">한 번이라도 확인해 보신 적</span> 있으십니까?</p>
+      <p class="sub sub--light" style="margin-bottom:4px">펜션명·지역만 알려주시면,<br>지금 그 화면을 1장으로 정리해 보내드립니다.</p>
     </div>
     <div class="cta-wrap">
-      <a href="#contact-bridge" class="btn btn--primary">우리 펜션 1분 확인 받기 <span class="btn-arrow">→</span></a>
+      <a href="#contact-bridge" class="btn btn--primary">우리 펜션, 지금 화면 받아보기 <span class="btn-arrow">→</span></a>
     </div>
   </div>
 </section>
 
-<!-- bridge (전화번호 집중 노출) -->
+<!-- bridge (행동 해소 · 카톡 우선) -->
 <section class="bridge" id="contact-bridge">
   <div class="bridge__inner">
     <span class="bridge__eyebrow">WE, PLACE.</span>
-    <h2 class="bridge__title">네이버 밖에서도,<br>그 지역의 기준이 되도록 정비합니다.</h2>
-    <p class="bridge__text">방금 보신 이야기가 우리 펜션 얘기처럼 느껴지셨다면,<br>지금 필요한 건 광고를 하나 더 켜는 일이 아니라<br>검색과 AI가 우리 펜션을 '기준'으로 삼게 정리하는 일입니다.<br>펜션명과 지역만 알려주시면, Weplace가 현재 검색 화면부터 함께 확인해 드립니다.</p>
-    <div class="bridge__phone">010-6461-6594</div>
-    <p class="bridge__phsub">펜션 · 풀빌라 · 독채 · 가족펜션 — 숙소 상관없이 Weplace가 먼저 확인해드립니다.</p>
+    <h2 class="bridge__title">우리 펜션의 '지금'을,<br>먼저 확인하는 것부터.</h2>
+    <p class="bridge__text">방금 보신 이야기가 우리 펜션 얘기처럼 느껴지셨다면,<br>지금 필요한 건 광고를 하나 더 켜는 일이 아닙니다.<br>검색과 AI가 우리 펜션을 어떻게 설명하고 있는지,<br>그 현재 화면부터 함께 보는 일입니다.</p>
+    <p class="bridge__phsub" style="margin-top:18px;font-size:14px">펜션명과 지역, 두 가지만 주시면 됩니다.</p>
     <div class="bridge__links">
-      <a href="tel:010-6461-6594" class="btn btn--bridge">📞 Weplace에 바로 연결 <span class="btn-arrow">→</span></a>
-      <a href="https://pf.kakao.com/_mxbexhX" target="_blank" rel="noopener" class="btn btn--bridge-kakao">카카오톡으로 문의 →</a>
+      <a href="https://pf.kakao.com/_mxbexhX" target="_blank" rel="noopener" class="btn btn--bridge-kakao">카카오톡으로 1분 안에 보내기 <span class="btn-arrow">→</span></a>
+      <a href="tel:010-6461-6594" class="btn btn--bridge">📞 통화가 편하시면 여기로</a>
     </div>
+    <p class="bridge__trust">010-6461-6594 · 박규민 대표가 직접 확인해 드립니다</p>
   </div>
 </section>
 
@@ -405,7 +443,10 @@
     if (window.innerWidth === lastW) return; // 스크롤 중 주소창 변화로 인한 높이 떨림 무시 (가로폭 바뀔 때만 재계산)
     lastW = window.innerWidth;
     var h = window.innerHeight;
-    for (var i = 0; i < panels.length; i++) { panels[i].style.minHeight = h + 'px'; }
+    for (var i = 0; i < panels.length; i++) {
+      var mult = parseFloat(panels[i].getAttribute('data-h')) || 1;
+      panels[i].style.minHeight = (h * mult) + 'px';
+    }
   }
   fixPanelHeights();
   window.addEventListener('resize', fixPanelHeights, { passive:true });
