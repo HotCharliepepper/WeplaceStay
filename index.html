@@ -10,18 +10,18 @@
 <meta property="og:site_name" content="We Place" />
 <meta property="og:title" content="우리 펜션은, 네이버 밖에서도 같은 펜션일까요?" />
 <meta property="og:description" content="펜션·풀빌라·독채 대표님을 위한 이야기. 잠깐 멈춰서 읽어보세요." />
-<meta property="og:url" content="https://weplace-pension.netlify.app/" />
+<meta property="og:url" content="https://weplace-stay.netlify.app/" />
 <meta property="og:locale" content="ko_KR" />
-<meta property="og:image" content="https://weplace-pension.netlify.app/og/story-og.png" />
-<meta property="og:image:secure_url" content="https://weplace-massage.netlify.app/og/story-og.png" />
+<meta property="og:image" content="https://weplace-stay.netlify.app/og/story-og.png" />
+<meta property="og:image:secure_url" content="https://weplace-stay.netlify.app/og/story-og.png" />
 <meta property="og:image:type" content="image/png" />
 <meta property="og:image:width" content="1200" />
 <meta property="og:image:height" content="630" />
 <meta property="og:image:alt" content="우리 펜션은, 네이버 밖에서도 같은 펜션일까요? — Weplace" />
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="우리 매장은, 네이버 밖에서도 같은 매장일까요?" />
-<meta name="twitter:description" content="마사지·에스테틱·왁싱·미용·케어 대표님을 위한 이야기. 잠깐 멈춰서 읽어보세요." />
-<meta name="twitter:image" content="https://weplace-massage.netlify.app/og/story-og.png" />
+<meta name="twitter:title" content="우리 펜션은, 네이버 밖에서도 같은 펜션일까요?" />
+<meta name="twitter:description" content="펜션·풀빌라·독채 대표님을 위한 이야기. 잠깐 멈춰서 읽어보세요." />
+<meta name="twitter:image" content="https://weplace-stay.netlify.app/og/story-og.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Myeongjo:wght@400;700;800&display=swap" rel="stylesheet">
@@ -184,26 +184,32 @@
   .void-bridge .ember { opacity:1; bottom:34%; }
   .void-bridge .void-cue { color:rgba(233,217,168,.45); }
   @media (max-width:480px){ .void-bridge { height:40vh; } }
+
+  /* ===== 장면 색 이음새 — 사진 가장자리 색에서 뽑은 그라데이션으로 컷과 컷을 잇는다 =====
+     (펜션 사진 미제공 → 동일 웜·세이지 팔레트 근사치. 사진 주시면 정확한 색으로 교체) */
+  .seam { width:100%; background:linear-gradient(180deg,var(--a),var(--b)); }
 </style>
 </head>
 <body>
 <div class="progress"><div class="progress__bar" id="bar"></div></div>
 
 <!-- 여는 이야기 -->
-<section class="panel photo" data-emotion="good">
+<section data-h="1.14" class="panel photo" data-emotion="good">
   <img class="cut" src="img/cut-01-opening.jpg" alt="" decoding="async" />
   <div class="panel__inner">
     <span class="chap"><span class="chap__no">여는 이야기</span><span class="chap__t">조용한 아침</span></span>
     <div class="glass">
-      <p class="narr">아침의 펜션은 조용합니다.<br><strong>네이버 플레이스도</strong> <br>잘 운영되고 있습니다.</p>
+      <p class="narr">아침의 펜션은 조용합니다.<br><strong>네이버 예약도</strong> 잘 운영되고 계십니다.</p>
       <p class="sub">객실도, 응대도 이미 충분합니다.<br>대표님은 이미 좋은 펜션을 가지고 계십니다.</p>
     </div>
   </div>
   <div class="hint">스크롤 ↓</div>
 </section>
 
+<div class="seam" style="--a:#8E7550;--b:#9A8358;height:8vh" aria-hidden="true"></div>
+
 <!-- 하나 (NEW · 케어 디테일) -->
-<section class="panel photo" data-emotion="good">
+<section data-h="1.07" class="panel photo" data-emotion="good">
   <img class="cut" src="img/cut-02.jpg" alt="" decoding="async" />
   <div class="panel__inner">
     <span class="chap"><span class="chap__no">하나</span><span class="chap__t">정성은 이미 충분합니다</span></span>
@@ -213,6 +219,8 @@
     </div>
   </div>
 </section>
+
+<div class="seam" style="--a:#94774E;--b:#B0986F;height:7vh" aria-hidden="true"></div>
 
 <!-- 둘 (손님) -->
 <section class="panel photo" data-emotion="bad">
@@ -227,8 +235,10 @@
   </div>
 </section>
 
+<div class="seam" style="--a:#8C7450;--b:#B0945E;height:8vh" aria-hidden="true"></div>
+
 <!-- 셋 (NEW · 예약 순간) -->
-<section class="panel photo" data-emotion="good">
+<section data-h="1.14" class="panel photo" data-emotion="good">
   <img class="cut" src="img/cut-04.jpg" alt="" decoding="async" />
   <div class="panel__inner">
     <span class="chap"><span class="chap__no">셋</span><span class="chap__t">검색은 예약으로 이어집니다</span></span>
@@ -238,6 +248,8 @@
     </div>
   </div>
 </section>
+
+<div class="seam" style="--a:#A6774F;--b:#1B1B16;height:6vh" aria-hidden="true"></div>
 
 <!-- 넷 (AI 화면) -->
 <section class="panel screen" data-emotion="bad">
@@ -255,6 +267,8 @@
   </div>
 </section>
 
+<div class="seam" style="--a:#26261F;--b:#B49E76;height:7vh" aria-hidden="true"></div>
+
 <!-- 다섯 (걱정) -->
 <section class="panel photo" data-emotion="bad">
   <img class="cut" src="img/cut-05.jpg" alt="" decoding="async" />
@@ -268,8 +282,10 @@
   </div>
 </section>
 
+<div class="seam" style="--a:#A88E64;--b:#AEA080;height:8vh" aria-hidden="true"></div>
+
 <!-- 여섯 (통찰 · OPEN-LOOP 보이드) -->
-<section class="panel photo panel--void" data-emotion="open" data-h="1.7">
+<section data-h="1.62" class="panel photo panel--void" data-emotion="open">
   <img class="cut" src="img/cut-06.jpg" alt="" decoding="async" />
   <div class="panel__inner">
     <span class="chap"><span class="chap__no">여섯</span><span class="chap__t">떠나는 진짜 이유</span></span>
@@ -283,8 +299,22 @@
   <div class="void-cue">⌄</div>
 </section>
 
+<div class="seam" style="--a:#060805;--b:#E4EADC;height:12vh" aria-hidden="true"></div>
+
+<!-- 구글 리프레임 (NEW · '구글 안 중요한데요' 해소 · 네이버 부정 없이) -->
+<section data-h="1.24" class="panel" data-emotion="good" style="background:linear-gradient(180deg,#E4EADC,#EAEDE1)">
+  <div class="panel__inner">
+    <span class="chap chap--dark"><span class="chap__no">짚고 가기</span><span class="chap__t">구글은, 누가 볼까요</span></span>
+    <div class="bubble" style="margin-bottom:24px">“우리 손님은 다 네이버로 예약하는데,<br>구글까지 챙겨야 하나요?”</div>
+    <p class="narr" style="margin-bottom:8px;font-size:clamp(18px,4.8vw,25px)">맞습니다. 발견은 네이버가 맞습니다.</p>
+    <p class="pivot-word">다만,</p>
+    <p class="narr" style="margin-bottom:14px;font-size:clamp(18px,4.8vw,25px)">확신이 안 선 손님은 한 번 더 확인하고,<br>요즘 AI도 그 한 번을 구글에서 읽습니다.</p>
+    <p class="sub" style="margin-bottom:0">구글·AI까지 같은 펜션으로 보이면,<br>손님은 거기서도 <span class="gold">안심하고 예약합니다.</span></p>
+  </div>
+</section>
+
 <!-- 일곱 (비교) -->
-<section class="panel" data-emotion="good" style="background:linear-gradient(180deg,#EDE9DF,#E4EADC)">
+<section data-h="1.14" class="panel" data-emotion="good" style="background:linear-gradient(180deg,#EDE9DF,#E4EADC)">
   <div class="panel__inner">
     <span class="chap chap--dark"><span class="chap__no">일곱</span><span class="chap__t">흩어진 것을, 한 흐름으로</span></span>
     <p class="narr" style="margin-bottom:8px;font-size:clamp(18px,4.8vw,25px)">블로그·후기·예약 채널을 따로 관리하면,<br>펜션 정보는 채널마다 <span class="warn">제각각이 됩니다.</span></p>
@@ -298,10 +328,10 @@
 </section>
 
 <!-- 여덟 (해결 흐름) -->
-<section class="panel" data-emotion="good" style="background:linear-gradient(180deg,#E4EADC,#EDEEE2)">
+<section data-h="1.14" class="panel" data-emotion="good" style="background:linear-gradient(180deg,#E4EADC,#EDEEE2)">
   <div class="panel__inner">
     <span class="chap chap--dark"><span class="chap__no">여덟</span><span class="chap__t">발견에서 재확인까지</span></span>
-    <p class="narr" style="margin-bottom:26px">네이버·블로그에 쌓인 정보를 <span class="gold">하나의 기준으로 묶어,</span><br>어느 화면에서 봐도 <br> 예약하고 싶은 펜션이 되게 합니다.</p>
+    <p class="narr" style="margin-bottom:26px">네이버·블로그에 쌓인 정보를 <span class="gold">하나의 기준으로 묶어,</span><br>어느 화면에서 봐도 같은 펜션이 되게 합니다.</p>
     <div class="flow">
       <div class="flow__step">
         <div class="flow__icon"><svg viewBox="0 0 32 32" fill="none" stroke="#5E6B52" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><circle cx="14" cy="14" r="8"/><line x1="20" y1="20" x2="26" y2="26"/></svg></div>
@@ -321,8 +351,10 @@
   </div>
 </section>
 
+<div class="seam" style="--a:#EDEEE2;--b:#1B1B16;height:8vh" aria-hidden="true"></div>
+
 <!-- 아홉 (A 원리시연 + B 라이브진단) -->
-<section class="panel screen" data-emotion="open">
+<section data-h="1.38" class="panel screen" data-emotion="open">
   <div class="panel__inner">
     <span class="chap chap--dark"><span class="chap__no" style="color:#E9D9A8">아홉</span><span class="chap__t" style="color:#FBF9F4">가장 확실한 증거</span></span>
     <div class="serp">
@@ -345,13 +377,15 @@
   </div>
 </section>
 
+<div class="seam" style="--a:#26261F;--b:#AC9F7F;height:9vh" aria-hidden="true"></div>
+
 <!-- 열 (조건 · 전화번호 제거) -->
-<section class="panel photo">
+<section data-h="1.07" class="panel photo">
   <img class="cut" src="img/cut-07.jpg" alt="" decoding="async" />
   <div class="panel__inner">
     <span class="chap"><span class="chap__no">열</span><span class="chap__t">먼저 안내드립니다</span></span>
     <div class="glass">
-      <p class="narr" style="font-size:clamp(19px,5vw,26px);margin-bottom:20px">이미 네이버 관리를 맡겨주신<br><span class="gold">기존 대표님께 먼저</span> 안내드립니다.</p>
+      <p class="narr" style="font-size:clamp(19px,5vw,26px);margin-bottom:20px">이미 네이버 예약을 맡겨주신<br><span class="gold">기존 대표님께 먼저</span> 안내드립니다.</p>
       <div class="terms">
         <div class="terms__row"><span class="terms__n">1</span><div class="terms__t">홈페이지는 처음 한 번만<span>펜션 공식 안내 페이지를 기준점으로 구축</span></div></div>
         <div class="terms__row"><span class="terms__n">2</span><div class="terms__t">관리는 분기마다 가볍게<span>방치되지 않도록 정보·검색 채널을 이어서 관리</span></div></div>
@@ -362,8 +396,10 @@
   </div>
 </section>
 
+<div class="seam" style="--a:#BFA381;--b:#8D6F49;height:8vh" aria-hidden="true"></div>
+
 <!-- 열하나 (NEW · 1년 뒤 자산) -->
-<section class="panel photo" data-emotion="good">
+<section data-h="1.24" class="panel photo" data-emotion="good">
   <img class="cut" src="img/cut-10-asset.jpg" alt="" decoding="async" />
   <div class="panel__inner">
     <span class="chap"><span class="chap__no">열하나</span><span class="chap__t">1년 뒤, 쌓이는 것</span></span>
@@ -379,14 +415,18 @@
   </div>
 </section>
 
+<div class="seam" style="--a:#B19170;--b:#15150F;height:6vh" aria-hidden="true"></div>
+
 <!-- 보이드 브릿지 — 마지막 행동 직전, 암흑 한 번 통과 -->
 <div class="void-bridge" aria-hidden="true">
   <div class="ember"><span></span><span></span><span></span><span></span></div>
   <div class="void-cue">⌄</div>
 </div>
 
+<div class="seam" style="--a:#0A0D08;--b:#A0896B;height:11vh" aria-hidden="true"></div>
+
 <!-- 닫는 이야기 (미완 질문 → bridge로 흐르게) -->
-<section class="panel photo" data-emotion="action">
+<section data-h="1.05" class="panel photo" data-emotion="action">
   <img class="cut" src="img/cut-09-closing.jpg" alt="" decoding="async" />
   <div class="panel__inner">
     <span class="chap"><span class="chap__no">닫는 이야기</span><span class="chap__t">지금, 우리 펜션은</span></span>
